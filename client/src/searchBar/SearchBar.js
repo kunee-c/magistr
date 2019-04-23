@@ -2,30 +2,29 @@
  * Created by kunee on 21/04/2019.
  */
 import React from 'react';
-
+import {
+    IconButton,
+    TextField
+} from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import {Link} from 'react-router-dom';
+import AutoSuggest from  '../autoSuggest/AutoSuggest';
 
 export default props => {
-    const {classes, handleChange, handleSearch} = props;
+
+    const topics = ['language','music'];
+    const cities = ['toronto','vancouver','montreal'];
+    const {classes, handleChange, handleSearch, value} = props;
     return (
         <form className={classes.container} noValidate autoComplete="off">
-            <TextField
-                id="standard-name"
-                label="Topic"
-                className={classes.textField}
-                value={this.state.topic}
-                margin="normal"
-                onChange={this.handleChange('topic')}
-            />
-            <TextField
-                id="standard-name"
-                label="City"
-                className={classes.textField}
-                value={this.state.city}
-                margin="normal"
-                onChange={this.handleChange('city')}
-            />
+
+            <AutoSuggest placeholder="topic"  handleChange={handleChange('topic')} value={value} data={topics}/>
+            <AutoSuggest placeholder="city" handleChange={handleChange('city')} value={value} data={cities}/>
+
             <IconButton color="inherit" aria-label="Menu">
-                <SearchIcon onClick={this.handleSearch}/>
+                <Link to={`/results`} onClick={handleSearch}>
+                    <SearchIcon />
+                </Link>
             </IconButton>
         </form>)
 };
