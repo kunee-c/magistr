@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core'
 
 import CssBaseline from '@material-ui/core/CssBaseline';
-import {lime, teal} from '@material-ui/core/colors'
+import {teal} from '@material-ui/core/colors'
 
 
 import WordCloud from "react-d3-cloud"
@@ -22,6 +22,8 @@ import AdCategory from './adCategory/AdCategory';
 import Login from './login/Login';
 import SearchResult from './seachResult/SearchResult';
 import SearchBar from './searchBar/SearchBar';
+import AdDetail from './ad/AdDetail';
+
 const theme = createMuiTheme({
     palette: {
         primary: teal
@@ -88,13 +90,12 @@ export default withStyles(styles)(
 
         state = {
             ads: [],
-            loginDialog: false
+            loginDialog: false,
+            queryParams: {}
         }
 
         async componentDidMount() {
-            const response = await fetch(`/api/users`);
-            const users = await response.json();
-            console.log(users);
+
         }
 
         handleLogin = () => {
@@ -103,13 +104,17 @@ export default withStyles(styles)(
 
 
         handleChange = name => value => {
-            this.setState({[name]: value});
+            let tmpQueryParams = this.state.queryParams;
+            tmpQueryParams[name] = value;
+            this.setState({queryParams: tmpQueryParams});
         }
 
 
-        handleSearch = async() => {
-            console.log(this.state);
-            const resAd = await fetch(`/api/ads?topic=${this.state.topic}&city=${this.state.city}`);
+        handleSearch = async(event) => {
+
+            const queryParams = this.buildQueryParams(this.state.queryParams);
+            console.log(queryParams);
+            const resAd = await fetch(`/api/ads?${queryParams}`);
             const ads = await resAd.json();
 
             const adsWithUser = ads.map(async ad => {
@@ -123,17 +128,17 @@ export default withStyles(styles)(
                 this.setState({
                     ads: adsWithUserCompleted
                 });
-                console.log(adsWithUserCompleted);
+                //this.setState({queryParams: {}});
             });
-
         }
 
-        fetchTopics = () => {
-
-        }
-
-        fetchCity = () => {
-
+        buildQueryParams = (filters) => {
+            let queryParams = "";
+            for(let filter in filters) {
+                if(filters[filter]!==false)
+                    queryParams += `${[filter]}=${filters[filter]}&`
+            }
+            return queryParams;
         }
 
         render() {
@@ -194,8 +199,17 @@ export default withStyles(styles)(
                             render={(routeProps) => {
                                 return (
                                     <>
-                                    <SearchResult classes={classes} ads={this.state.ads}
+                                    <SearchResult {...routeProps} classes={classes} ads={this.state.ads}
                                                   handleChange={this.handleChange} handleSearch={this.handleSearch}/>
+                                    </>
+                                );
+                            }}/>
+                        <Route
+                            exact path='/detail'
+                            render={(routeProps) => {
+                                return (
+                                    <>
+                                    <AdDetail {...routeProps} classes={classes}/>
                                     </>
                                 );
                             }}/>
