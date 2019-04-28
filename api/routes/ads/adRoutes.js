@@ -7,9 +7,7 @@ const router = express.Router();
 
 router.route('/')
     .get(async (req, res, next) => {
-        const { topic, city } = req.query;
-
-        res.status(200).json(await adService.findByTopicAndLocation(topic, city));
+        res.status(200).json(await adService.findByCriteria(req.query));
     })
     .post(async (req, res, next) => {
         console.log(req.body);
@@ -20,5 +18,7 @@ router.route('/:id')
     .get( (req, res, next) => {
        const ad = adService.getAd(req.params.id);
     });
+
+
 
 exports.router = router;

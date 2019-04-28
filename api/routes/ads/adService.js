@@ -26,3 +26,12 @@ exports.findByTopicAndLocation = async (topic, city) => {
     const cityRegEx = new RegExp(city,'i');
     return await AdModel.find({topic : topicRegEx, location: cityRegEx});
 }
+
+exports.findByCriteria = async (filters) => {
+
+    for(let filter in filters) {
+        filters[filter] = filters[filter].toLowerCase();
+    }
+    console.log(filters);
+    return await AdModel.find(filters);
+}
