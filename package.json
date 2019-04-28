@@ -39,7 +39,8 @@
     "react-d3-cloud": "^0.7.0",
     "react-dom": "^16.8.4",
     "react-router-dom": "^5.0.0",
-    "react-tag-cloud": "^1.3.2"
+    "react-tag-cloud": "^1.3.2",
+    "typeface-roboto": "0.0.54"
   },
   "devDependencies": {
     "hackeryou-fullstack-react-scripts": "2.3.0",
