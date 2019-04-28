@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/HackerYou/con-ed-full-stack-student-notes/issues"
   },
-  "homepage": "https://github.com/HackerYou/con-ed-full-stack-student-notes#readme",
+  "homepage": "",
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
