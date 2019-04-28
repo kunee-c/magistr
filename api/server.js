@@ -16,7 +16,6 @@ const middleWare = require('./middleware');
 const errorHandlers = require('./middleware/errorHandlers');
 
 // 4. Require routes
-const { router: bookRoutes } = require('./routes/books/bookRoutes');
 const { router: userRoutes } = require('./routes/users/userRoutes');
 const { router: adRoutes} = require('./routes/ads/adRoutes');
 
@@ -27,7 +26,6 @@ const { PORT, MONGO_DB_URL } = require('./utils/constants');
 applyMiddleware(middleWare, router);
 
 // 7. Utilise routes
-router.use('/api/books', bookRoutes);
 router.use('/api/users', userRoutes);
 router.use('/api/ads', adRoutes);
 // 8. Apply error handling middleware (meaningfully last)
