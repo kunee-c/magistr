@@ -3,6 +3,7 @@
 const express = require('express');
 const http = require('http');
 const mongoose = require('mongoose');
+const path = require('path');
 
 // 1. Create main express intance
 const router = express();
@@ -26,6 +27,10 @@ const { PORT, MONGO_DB_URL } = require('./utils/constants');
 applyMiddleware(middleWare, router);
 
 // 7. Utilise routes
+const publicFolder = path.resolve(__dirname, '..', 'build');
+console.log(router.use('/', express.static(publicFolder)))
+router.use('/', express.static(publicFolder));
+
 router.use('/api/users', userRoutes);
 router.use('/api/ads', adRoutes);
 // 8. Apply error handling middleware (meaningfully last)
