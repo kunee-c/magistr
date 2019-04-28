@@ -21,6 +21,18 @@ const adSchema = new Schema({
         type: String,
         required: true
     },
+    price : {
+        type: Number,
+        required: true
+    },
+    isFirstLessonFree: {
+        type: Boolean,
+        required: false
+    },
+    teachingMode : {
+        type: Array,
+        required: false
+    },
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
