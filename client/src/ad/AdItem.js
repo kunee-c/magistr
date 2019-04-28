@@ -10,6 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 import {Typography} from '@material-ui/core'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import {Link} from 'react-router-dom';
 
 export default props => {
 
@@ -21,9 +22,9 @@ export default props => {
                 <Grid item xs={2}>
                     <Avatar alt="Remy Sharp"
                             src="https://cdn.pixabay.com/photo/2015/07/28/22/04/female-865110_1280.jpg"
-                            style={{width:60, height:60}}/>
+                            style={{width:55, height:55, marginLeft:10}}/>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={7}>
                     <Typography variant="h6">
                         {ad.user}
                     </Typography>
@@ -34,10 +35,13 @@ export default props => {
                         {ad.description}
                     </Typography>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={3}>
                     <Typography>
                         $12/h
                     </Typography>
+                    <Link to={{pathname: '/detail', state: {} }}>
+                        Book a lesson
+                    </Link>
                 </Grid>
             </Grid>
         </Paper>)
