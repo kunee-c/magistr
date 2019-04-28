@@ -13,11 +13,12 @@
     "logs:server": "pm2 logs /api/ --lines 10",
     "start:client": "react-scripts start",
     "build:client": "react-scripts build",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "deploy": "node api/server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HackerYou/con-ed-full-stack-student-notes.git"
+    "url": "git+https://github.com/kunee-c/magistr"
   },
   "keywords": [],
   "author": "",
