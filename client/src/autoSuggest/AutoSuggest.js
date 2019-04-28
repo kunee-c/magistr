@@ -20,6 +20,11 @@ class AutoSuggest extends React.Component {
         };
     }
 
+    componentDidMount() {
+        if(this.props.value)
+            this.setState({value: this.props.value })
+    }
+
     // Use your imagination to render suggestions.
     renderSuggestion = suggestion => (
         <span>
@@ -30,7 +35,6 @@ class AutoSuggest extends React.Component {
     getSuggestions = value => {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
-        console.log('getSuggestions from: '+this.props.data);
         return inputLength === 0 ? [] : this.props.data.filter(item =>
             item.toLowerCase().slice(0, inputLength) === inputValue
         );

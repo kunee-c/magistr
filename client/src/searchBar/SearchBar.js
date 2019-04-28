@@ -3,28 +3,43 @@
  */
 import React from 'react';
 import {
-    IconButton,
-    TextField
+    IconButton
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import {Link} from 'react-router-dom';
 import AutoSuggest from  '../autoSuggest/AutoSuggest';
 
-export default props => {
+class SearchBar extends React.Component {
 
-    const topics = ['language','music'];
-    const cities = ['toronto','vancouver','montreal'];
-    const {classes, handleChange, handleSearch, value} = props;
-    return (
-        <form className={classes.container} noValidate autoComplete="off">
+    state = {
 
-            <AutoSuggest placeholder="topic"  handleChange={handleChange('topic')} value={value} data={topics}/>
-            <AutoSuggest placeholder="city" handleChange={handleChange('city')} value={value} data={cities}/>
+    }
 
-            <IconButton color="inherit" aria-label="Menu">
-                <Link to={`/results`} onClick={handleSearch}>
-                    <SearchIcon />
-                </Link>
-            </IconButton>
-        </form>)
-};
+    handleChange = name => value => {
+        this.props.handleChange(name)(value);
+        this.setState({[name] : value});
+    }
+
+    render() {
+        const topics = ['language', 'music'];
+        const cities = ['toronto', 'vancouver', 'montreal'];
+        const {classes, handleSearch} = this.props;
+        return (
+            <form className={classes.container} noValidate autoComplete="off">
+                <div style={{marginRight: 15}}>
+                    <AutoSuggest placeholder="topic" handleChange={this.handleChange('topic')} data={topics}/>
+                </div>
+                <div>
+                    <AutoSuggest placeholder="city" handleChange={this.handleChange('location')} data={cities}/>
+                </div>
+                <IconButton color="inherit" aria-label="Menu">
+                    <Link to={{pathname: '/results', state: this.state }} onClick={handleSearch}>
+                        <SearchIcon />
+                    </Link>
+                </IconButton>
+            </form>)
+    }
+
+}
+
+export default SearchBar;
