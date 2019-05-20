@@ -34,12 +34,15 @@ router.route('/:id')
 
 router.route('/login')
     .post(async (req, res, next) => {
+
         const {email, password} =  req.body;
+
         const user = await userService.getUserByEmail(email);
-        if(user.checkPassword(password))
+        if(user !==null && user.checkPassword(password))
             res.send(200).json({authent:'OK'});
         else
-            res.send(403);
+            res.send(403).json({authent:'KO'});
+
     });
 
 exports.router = router;
