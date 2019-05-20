@@ -2,22 +2,14 @@
  * Created by kunee on 22/04/2019.
  */
 import Autosuggest from 'react-autosuggest';
-import React from 'react';
+import React, { Component } from 'react';
 
 
-class AutoSuggest extends React.Component {
-    constructor() {
-        super();
+class AutoSuggest extends Component {
 
-        // Autosuggest is a controlled component.
-        // This means that you need to provide an input value
-        // and an onChange handler that updates this value (see below).
-        // Suggestions also need to be provided to the Autosuggest,
-        // and they are initially empty because the Autosuggest is closed.
-        this.state = {
-            value: '',
-            suggestions: []
-        };
+    state = {
+        value: '',
+        suggestions: []
     }
 
     componentDidMount() {
@@ -83,6 +75,7 @@ class AutoSuggest extends React.Component {
                 getSuggestionValue={suggestion => suggestion}
                 renderSuggestion={this.renderSuggestion}
                 inputProps={inputProps}
+                theme={this.props.theme}
             />
         );
     }
