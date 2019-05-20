@@ -5,5 +5,5 @@ const { handleServingPublicFolder } = require('./public');
 
 module.exports = [
   handleBodyRequestParsing,
-  handleServingPublicFolder,
+  handleServingPublicFolder
 ];
