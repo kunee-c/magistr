@@ -12,11 +12,9 @@ export default props => {
     return (
         <AppBar position="static">
             <Toolbar>
-                <IconButton className={btnclass.menuButton} color="inherit" aria-label="Menu">
-                    <MenuIcon />
-                </IconButton>
+
                 <Link to={`/`}>
-                    <HomeIcon color="action"/>
+                    <HomeIcon style={{color:'#fafafa'}}/>
                 </Link>
                 <Typography variant="h6" color="inherit" className={btnclass.grow}>
 

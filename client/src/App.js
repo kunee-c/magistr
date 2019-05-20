@@ -5,6 +5,7 @@ import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles'
 import {
     BrowserRouter as Router,
     Route,
+    withRouter
 } from 'react-router-dom';
 import {
     Grid,
@@ -37,31 +38,8 @@ const styles = {
     grow: {
         flexGrow: 1,
     },
-    menuButton: {
-        marginLeft: -12,
-        marginRight: 20,
-    },
-    container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        height: 100,
-        alignItems: 'center',
-        justifyContent: 'center'
-
-    },
-    textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        width: '45%',
-    },
-    dense: {
-        marginTop: 19,
-    },
-    menu: {
-        width: 200,
-    },
-    formControl: {
-        margin: theme.spacing.unit * 3,
+    title: {
+        cursor: 'pointer'
     },
     gridListContainer: {
         height: '400px',
@@ -76,12 +54,7 @@ const styles = {
         // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
         transform: 'translateZ(0)',
     },
-    title: {
-        color: theme.palette.primary.light,
-    },
-    titleBar: {
-        background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-    }
+
 };
 
 
@@ -91,54 +64,55 @@ export default withStyles(styles)(
         state = {
             ads: [],
             loginDialog: false,
-            queryParams: {}
+            queryParams: {},
+            credentials: {},
+            userCity: ''
         }
 
         async componentDidMount() {
-
+            fetch('/api/geolocation')
+                .then(res => res.json())
+                .then(geolocation => {
+                    this.setState({userCity: geolocation.city})
+                })
         }
 
-        handleLogin = () => {
+
+
+        handleClickOpen = () => {
             this.setState({loginDialog: !this.state.loginDialog})
         }
 
+        handleLogin = () => {
+            fetch('/api/users/login', {
+                method: 'POST',
+                body: JSON.stringify(this.state.credentials),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json()).then(res => console.log(res)).catch(e => console.log(e));
+        }
 
-        handleChange = name => value => {
-            let tmpQueryParams = this.state.queryParams;
-            tmpQueryParams[name] = value;
-            this.setState({queryParams: tmpQueryParams});
+        handleChangeLoginDialog = name => value => {
+            const credentialsTmp = this.state.credentials;
+            credentialsTmp[name] = value.target.value;
+            this.setState({credentials: credentialsTmp});
         }
 
 
-        handleSearch = async(event) => {
-
-            const queryParams = this.buildQueryParams(this.state.queryParams);
-            console.log(queryParams);
-            const resAd = await fetch(`/api/ads?${queryParams}`);
-            const ads = await resAd.json();
-
-            const adsWithUser = ads.map(async ad => {
-                const resUser = await fetch(`/api/users/${ad.user}`);
-                const user = await resUser.json();
-                ad.user = user.firstName;
-                return ad;
-            });
-
-            Promise.all(adsWithUser).then(adsWithUserCompleted => {
-                this.setState({
-                    ads: adsWithUserCompleted
-                });
-                //this.setState({queryParams: {}});
-            });
+        updateAds = (ads) => {
+            this.setState({ads: ads});
         }
 
-        buildQueryParams = (filters) => {
-            let queryParams = "";
-            for(let filter in filters) {
-                if(filters[filter]!==false)
-                    queryParams += `${[filter]}=${filters[filter]}&`
-            }
-            return queryParams;
+
+        getTopics = () => {
+            const topics = ['english', 'music', 'cooking', 'math'];
+            return topics;
+        }
+
+        getCities = () => {
+            const cities = ['toronto', 'vancouver', 'montreal', 'missisauga'];
+            return cities;
         }
 
         render() {
@@ -155,8 +129,9 @@ export default withStyles(styles)(
                             render={(routeProps) => {
                                 return (
                                     <>
-                                    <Bar login={this.handleLogin} btnclass={classes}/>
-                                    <Login open={this.state.loginDialog} handleLogin={this.handleLogin}/>
+                                    <Bar login={this.handleClickOpen} btnclass={classes}/>
+                                    <Login open={this.state.loginDialog} handleClose={this.handleClickOpen}
+                                           handleChange={this.handleChangeLoginDialog} handleLogin={this.handleLogin}/>
                                     </>
                                 );
                             }}
@@ -166,32 +141,21 @@ export default withStyles(styles)(
                             render={(routeProps) => {
                                 return (
                                     <>
-                                    <Grid container justify="center" spacing={16}>
+                                    <Grid container justify="center" spacing={16} className={classes.gridListContainer}>
+                                        <Grid item xs={9} style={{marginTop: 50}}>
+                                            <SearchBar
+                                                updateAds={this.updateAds} getCities={this.getCities}
+                                                getTopics={this.getTopics} direction="row"/>
+
+                                        </Grid>
                                         <Grid item xs={12}>
-                                            <SearchBar classes={classes} handleChange={this.handleChange}
-                                                       handleSearch={this.handleSearch}/>
-
+                                            <AdCategory {...routeProps} classes={classes} location={this.state.userCity} updateAds={this.updateAds}/>
                                         </Grid>
                                     </Grid>
                                     </>
                                 );
                             }}
                         />
-                        <Route
-                            exact path='/'
-                            render={(routeProps) => {
-                                return (
-                                    <>
-                                    <Grid container justify="center" spacing={16} alignItems="center"
-                                          className={classes.gridListContainer} >
-                                        <Grid item ws={12}>
-                                            <AdCategory classes={classes}/>
-                                        </Grid>
-
-                                    </Grid>
-                                    </>
-                                )}
-                            }/>
 
 
                         <Route
@@ -200,12 +164,14 @@ export default withStyles(styles)(
                                 return (
                                     <>
                                     <SearchResult {...routeProps} classes={classes} ads={this.state.ads}
-                                                  handleChange={this.handleChange} handleSearch={this.handleSearch}/>
+                                                  getCities={this.getCities}
+                                                  getTopics={this.getTopics}
+                                                  updateAds={this.updateAds}/>
                                     </>
                                 );
                             }}/>
                         <Route
-                            exact path='/detail'
+                            exact path='/ads/:id'
                             render={(routeProps) => {
                                 return (
                                     <>
