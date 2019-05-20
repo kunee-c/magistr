@@ -13,12 +13,20 @@ const adSchema = new Schema({
         type: String,
         required: true
     },
-    description: {
+    descShort: {
+        type: String,
+        required: true
+    },
+    descLong: {
         type: String,
         required: true
     },
     location: {
         type: String,
+        required: true
+    },
+    geolocation: {
+        type: Schema.Types.Mixed,
         required: true
     },
     price : {

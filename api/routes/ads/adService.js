@@ -12,8 +12,8 @@ exports.updateAd = (ad) => {
 
 }
 
-exports.findOne = (id) => {
-
+exports.findOne = async (id) => {
+    return await  AdModel.findById(id);
 }
 
 exports.findAll = async () => {
