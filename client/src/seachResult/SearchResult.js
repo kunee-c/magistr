@@ -8,22 +8,17 @@ import {
     Divider,
     FormGroup,
     FormControlLabel,
-    Checkbox
+    Checkbox,
+    Typography
 } from '@material-ui/core'
-import Button from '@material-ui/core/Button';
 import AdItem from '../ad/AdItem';
-import AutoSuggest from '../autoSuggest/AutoSuggest';
+import SearchBar from '../searchBar/SearchBar';
 
 class SearchResult extends Component {
-
-    constructor() {
-        super();
-    }
 
     state = {
         isFirstLessonFree: false
     }
-
 
     handleChange = name => event => {
         this.setState({[name]: event.target.checked});
@@ -35,64 +30,19 @@ class SearchResult extends Component {
     }
 
     render() {
-        const topics = ['language', 'music'];
-        const cities = ['toronto', 'vancouver', 'montreal'];
 
-        const {ads, handleChange, handleSearch, location} = this.props;
-
+        const {getCities, getTopics, classes, ads, updateAds} = this.props;
 
         return (
-            <Grid container style={{marginTop: '30px'}} justify="center" spacing={16}>
+            <Grid container style={{marginTop: '25px'}} justify="space-around" spacing={0}>
                 <Grid item xs={3}>
-
-                    <form noValidate autoComplete="off" style={{marginTop: -8}}>
-
-                        <div>
-                            <AutoSuggest placeholder="topic" handleChange={handleChange('topic')} data={topics}
-                                         value={location.state.topic}/>
-                        </div>
-                        <div style={{marginTop: 15}}>
-                            <AutoSuggest placeholder="city" handleChange={handleChange('location')} data={cities}
-                                         value={location.state.location}/>
-                        </div>
-
-                    </form>
-
-                    <Divider variant="fullWidth" style={{marginTop: 30, marginBottom: 30}}/>
-                    <form noValidate autoComplete="off">
-                        <FormGroup>
-                            <FormControlLabel
-                                control={
-                                    <Checkbox checked={this.state.isFirstLessonFree}
-                                              onChange={this.handleChange('isFirstLessonFree')}
-                                              value='isFirstLessonFree'/>
-                                }
-                                label="First lesson free"
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox checked={false} value=""/>
-                                }
-                                label="Skype lesson"
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={false}
-                                        value=""
-                                    />
-                                }
-                                label="Face to face"
-                            />
-                        </FormGroup>
-                        <Button variant="outlined" color="primary" onClick={handleSearch}
-                                style={{marginTop: 30, width: '100%'}}>
-                            Search
-                        </Button>
-                    </form>
+                    <SearchBar classes={classes} getCities={getCities} getTopics={getTopics} updateAds={updateAds} direction="column"/>
                 </Grid>
-                <Grid item xs={7}>
-                    <Grid container spacing={24} direction="column">
+                <Grid item xs={8}>
+                    <Grid container spacing={24} direction="column" >
+                        {
+                            ads.length === 0 && <Grid item xs={12}><Typography align ="center" variant="h5" color="error">No results</Typography></Grid>
+                        }
                         {
                             ads.map(ad => (
                                 <Grid item xs={12}>
