@@ -7,26 +7,33 @@
 import React from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
-import {Typography} from '@material-ui/core'
+import {Typography, Button, Icon} from '@material-ui/core'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
 
-export default props => {
+import {
+    withRouter
+} from 'react-router-dom';
 
-    const {ad} = props;
+const AdItem = props => {
 
+    const {ad, user} = props;
+
+    const handleClickDetail = () => {
+        props.history.push({pathname:`/ads/${ad._id}`})
+    }
     return (
-        <Paper>
+        <Paper style={{height:90}}>
             <Grid container alignItems="center" spacing={16}>
                 <Grid item xs={2}>
-                    <Avatar alt="Remy Sharp"
-                            src="https://cdn.pixabay.com/photo/2015/07/28/22/04/female-865110_1280.jpg"
-                            style={{width:55, height:55, marginLeft:10}}/>
+                    <Avatar alt="Picture"
+                            src={ad.teacher.picture}
+                            style={{width: 55, height: 55, marginLeft: 10}}/>
                 </Grid>
-                <Grid item xs={7}>
+                <Grid item xs={6}>
                     <Typography variant="h6">
-                        {ad.user}
+                        {ad.teacher.firstName}
                     </Typography>
                     <Typography ariant="caption" gutterBottom>
                         {ad.title}
@@ -35,14 +42,23 @@ export default props => {
                         {ad.description}
                     </Typography>
                 </Grid>
-                <Grid item xs={3}>
-                    <Typography>
-                        $12/h
-                    </Typography>
-                    <Link to={{pathname: '/detail', state: {} }}>
+                <Grid item xs={4}>
+                    <div>
+                    <Typography variant="h6" inline gutterBottom >
+                        ${ad.price}
+
+                    </Typography >
+                    { ad.isFirstLessonFree &&
+                    <Typography variant="caption" color="secondary" style={{marginLeft:10}} inline>First lesson free!</Typography>}
+                    </div>
+                    <Button variant="contained" color="secondary"  onClick={handleClickDetail}>
                         Book a lesson
-                    </Link>
+                    </Button>
+
+
                 </Grid>
             </Grid>
         </Paper>)
 }
+
+export default withRouter(AdItem);
