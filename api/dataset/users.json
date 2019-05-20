@@ -1,0 +1,64 @@
+[{
+  "email": "amanda-lee@gmail.com",
+  "password": "amanda-lee",
+  "firstName": "amanda",
+  "lastName": "lee",
+  "isTeacher": false,
+  "picture":"https://images.pexels.com/photos/2092709/pexels-photo-2092709.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+},
+  {
+    "email": "mirenda-parks@gmail.com",
+    "password": "miranda-parks",
+    "firstName": "miranda",
+    "lastName": "parks",
+    "isTeacher": false,
+    "picture":"https://images.pexels.com/photos/2100063/pexels-photo-2100063.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+  },
+  {
+    "email": "sasha-toon@gmail.com",
+    "password": "sacha-toon",
+    "firstName": "sacha",
+    "lastName": "toon",
+    "isTeacher": false,
+    "picture":"https://images.pexels.com/photos/2101849/pexels-photo-2101849.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+  },
+  {
+    "email": "becky-rame@gmail.com",
+    "password": "becky-rame",
+    "firstName": "becky",
+    "lastName": "ramee",
+    "isTeacher": false,
+    "picture":"https://images.pexels.com/photos/2098172/pexels-photo-2098172.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+  },
+  {
+    "email": "cook1@gmail.com",
+    "password": "cook1",
+    "firstName": "Toni",
+    "lastName": "Cookie",
+    "isTeacher": true,
+    "picture":"https://cdn.pixabay.com/photo/2015/05/20/14/23/cooking-775503_1280.jpg"
+  },
+  {
+    "email": "cook1@gmail.com",
+    "password": "cook1",
+    "firstName": "Toni",
+    "lastName": "Cookie",
+    "isTeacher": true,
+    "picture":"https://cdn.pixabay.com/photo/2015/05/20/14/23/cooking-775503_1280.jpg"
+  },
+  {
+    "email": "cook1@gmail.com",
+    "password": "cook1",
+    "firstName": "Toni",
+    "lastName": "Cookie",
+    "isTeacher": true,
+    "picture":"https://cdn.pixabay.com/photo/2015/05/20/14/23/cooking-775503_1280.jpg"
+  },
+  {
+    "email": "cook1@gmail.com",
+    "password": "cook1",
+    "firstName": "Toni",
+    "lastName": "Cookie",
+    "isTeacher": true,
+    "picture":"https://cdn.pixabay.com/photo/2015/05/20/14/23/cooking-775503_1280.jpg"
+  }]

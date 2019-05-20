@@ -1,0 +1,119 @@
+[
+  {
+    "title": "nutritionist",
+    "topic": "cooking",
+    "descShort": "Chef/nutritionist/food theorist based in Toronto helping you become a better cook and/or eat healthier",
+    "descLong":"I want to make sure that all your questions and doubts are answered, and you truly enjoy what you have learned. We can work together to figure out a delivery method that is tailored to your needs and works the best for you.",
+    "location": "toronto",
+    "price": 30,
+    "isFirstLessonFree": true
+  },
+  {
+    "title": "Toronto chef",
+    "topic": "cooking",
+    "descShort": "Professional Chef shows you best culinary techniques applied to pastries and desserts in Downtown Toronto",
+    "descLong":"I love hands on experience, so you will be learning by doing it. Depending on the recipe or on what do you want to learn, you might just need an oven and a couple bowls, I will bring equipment to you and teach you proper equipment usage and maintenance.",
+    "location": "toronto",
+    "price": 25,
+    "isFirstLessonFree": false
+  },
+  {
+    "title": "Culinary arts",
+    "topic": "cooking",
+    "descShort": "Culinary arts (with a degree) graduate teaching everything food related, teaching in Toronto",
+    "descLong":"I teach vegetarian/vegan cooking, asian cuisine (especially Korean), Canadian cuisine. My teaching methods are to show demos and also teach by lectures. I think people learn great if they're comfortable and not scared to ask any questions and I am all for that",
+    "location": "toronto",
+    "price": 30,
+    "isFirstLessonFree": false
+  },
+  {
+    "title": "Easy cooking",
+    "topic": "cooking",
+    "descShort": "Want to learn awesome dishes? Yes? Well, let me show you how",
+    "descLong":"The way i teach is both fun and on point. I love to teach people who love to learn anything. My goal is complete when you are satisfied with the knowledge taugh",
+    "location": "toronto",
+    "price": 15,
+    "isFirstLessonFree": false
+  },
+  {
+    "title": "Italian cook",
+    "topic": "cooking",
+    "descShort": "Italian Canadian living in torontot gives lessons to make your time in the kitchen a little easier",
+    "descLong":"My teaching methods are based around each student or group. I cater my lessons to what you want to learn and in ways that fit you best",
+    "location": "toronto",
+    "price": 25,
+    "isFirstLessonFree": false
+  },
+  {
+    "title": "casual cooking",
+    "topic": "cooking",
+    "descShort": "Teaching students how to prepare meals that are fun and less time consumin",
+    "descLong":"I base my teachers on approaches I have learnt in the past that have worked for me, I also base it on new things I have learnt that work for me",
+    "location": "toronto",
+    "price": 22,
+    "isFirstLessonFree": true
+  },
+  {
+    "title": "BBA student teach english for student",
+    "topic": "english",
+    "descShort": "A passionate BBA student at the Schulich School of Business, looking to share her expertise and knowledge of Academic English and Business related subjects in the form of mentoring students.",
+    "descLong":"I believe in the uniqueness that resides in each individual. This is why I base my teaching methods on what makes my students the most comfortable. This might include lecture style sessions, self directed sessions, sessions with visual aid or weekly tests and quizzes to manage progress",
+    "location": "toronto",
+    "price": 25,
+    "isFirstLessonFree": true
+  },
+  {
+    "title": "Lesson in English, Math, Science",
+    "topic": "english",
+    "descShort": "I am a Pharmacy student looking to help out with all things Math, English, and Science",
+    "descLong":"My teaching methods are devising unique lessons to fit individual needs in skill building and full instruction on each subject. I believe in giving early intervention support to students just beginning to struggle with materials and grading student tests and subsequently reviewed strengths and weakness for future improvements.",
+    "location": "toronto",
+    "price": 20
+  },
+  {
+    "title": "Have fun and learn English",
+    "topic": "english",
+    "descShort": "Top Notch Elementary and English Teacher Available for Immediate Hire! Proven Successful results!",
+    "descLong":"My teaching methods are simple, yet interactive, consistent and fun. Professional with a sense of humour and responsibility for ALL my students' success/es. My classes are geared towards young children with phonetic difficulties, special needs and ESL. New speakers of English Language, difficulty with literacy and math. Grades - Kindergarten to Adult learners. Non judgmental and will ensure each student succeeds at his/her best potential. Consistent follow up and support will be provided as well.",
+    "location": "toronto",
+    "price": 17,
+    "isFirstLessonFree": true
+  },
+  {
+    "title": "English for youth",
+    "topic": "english",
+    "descShort": "I am a motivated university graduate that enjoys helping out the youth in my community",
+    "descLong":"I base my teachings and help on the students ability. I try my best to figure out the persons learning capabilities and work with them to learn in the best possible way. I use my patience to keep them motivated as well.",
+    "location": "toronto",
+    "price": 30,
+    "isFirstLessonFree": false
+  },
+  {
+    "title": "Become fluent",
+    "topic": "english",
+    "descShort": "To become a popular actress and nroll language subject now Hurry!while stock last.",
+    "descLong":"My methodology of teaching,use cooperative in group studies and peer teaching method for individual.i use also multi diversities of learning",
+    "location": "toronto",
+    "price": 15,
+    "isFirstLessonFree": true
+  },
+  {
+    "title": "Face the globalization",
+    "topic": "english",
+    "descShort": "If you want to strive in a global world, strong communication in English is what outshines you apart! (Don't worry, i'm here to guide you step by step for a perfect skill)",
+    "descLong":"Considering need of very student is different from one another I personally give attention to each student separately. I sit and listen to all possible problems and worries encountered so far, followed by preparing an organized time table with step by step process on how to rectifying the problems out. A customized syllabus is prepared and taught.",
+    "location": "toronto",
+    "price": 17,
+    "isFirstLessonFree": false
+  },
+  {
+    "title": "Catch of all them",
+    "topic": "cat",
+    "descShort": "Catch of all them",
+    "descLong":"Professional cats trainer, learn how to make them behave",
+    "location": "toronto",
+    "price": 20,
+    "isFirstLessonFree": false
+  }
+
+]
