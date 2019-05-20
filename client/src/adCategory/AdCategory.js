@@ -15,7 +15,7 @@ import {
 export default props => {
     const tileData = [
         {
-            img: 'https://cdn.pixabay.com/photo/2015/06/08/14/46/piano-801707_1280.jpg',
+            img: 'https://cdn.pixabay.com/photo/2014/03/04/07/14/music-279332_1280.jpg',
             title: 'Piano',
             author: 'Alex'
         },
@@ -25,13 +25,33 @@ export default props => {
             author: 'Jules'
         },
         {
-            img: 'https://cdn.pixabay.com/photo/2019/04/11/19/45/apple-4120453_1280.jpg',
+            img: 'https://cdn.pixabay.com/photo/2017/09/16/19/21/salad-2756467_1280.jpg',
             title: 'Cooking',
             author: 'Karen'
         }
     ];
 
-    const {classes} = props;
+    const handleSearch = (topic, city) => async() => {
+        console.log(topic+' '+city);
+        const resAd = await fetch(`/api/ads?location=${city}&topic=${topic}`);
+        const ads = await resAd.json();
+
+        const adsWithUser = ads.map(async ad => {
+            const resUser = await fetch(`/api/users/${ad.user}`);
+            const user = await resUser.json();
+            ad.teacher = user;
+            return ad;
+        });
+
+        Promise.all(adsWithUser).then(adsWithUserCompleted => {
+            props.updateAds(adsWithUserCompleted);
+            props.history.push({pathname: '/results'})
+        });
+
+    }
+
+
+    const {classes, location} = props;
     return (
         <>
         <GridList className={classes.gridList} cols={2.5}>
@@ -39,7 +59,7 @@ export default props => {
                                <GridListTile key={tile.img}>
                                    <img src={tile.img} alt={tile.title}/>
                                    <GridListTileBar
-                                       title={tile.title}
+                                       title={'Click here to see '+tile.title+' teachers in '+location}
                                        classes={{
                                            root: classes.titleBar,
                                            title: classes.title,
@@ -49,6 +69,8 @@ export default props => {
                                                <StarBorderIcon className={classes.title}/>
                                            </IconButton>
                                        }
+
+                                       onClick={handleSearch(tile.title, location)}
                                    />
                                </GridListTile>
                            ))}
