@@ -10,7 +10,8 @@ import Avatar from '@material-ui/core/Avatar';
 import {Typography, Button, Icon} from '@material-ui/core'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import {Link} from 'react-router-dom';
+
+import {unstable_useMediaQuery as useMediaQuery} from '@material-ui/core/useMediaQuery';
 
 import {
     withRouter
@@ -18,43 +19,56 @@ import {
 
 const AdItem = props => {
 
+    let itemHeight;
+
+    if (useMediaQuery('(max-width:600px)'))
+        itemHeight = 110;
+    else
+        itemHeight = 90;
+
     const {ad, user} = props;
 
     const handleClickDetail = () => {
-        props.history.push({pathname:`/ads/${ad._id}`})
+        props.history.push({pathname: `/ads/${ad._id}`})
     }
     return (
-        <Paper style={{height:90}}>
+        <Paper style={{height: itemHeight}}>
             <Grid container alignItems="center" spacing={16}>
-                <Grid item xs={2}>
-                    <Avatar alt="Picture"
-                            src={ad.teacher.picture}
-                            style={{width: 55, height: 55, marginLeft: 10}}/>
-                </Grid>
-                <Grid item xs={6}>
-                    <Typography variant="h6">
-                        {ad.teacher.firstName}
-                    </Typography>
-                    <Typography ariant="caption" gutterBottom>
-                        {ad.title}
-                    </Typography>
-                    <Typography variant="body1">
-                        {ad.description}
-                    </Typography>
-                </Grid>
-                <Grid item xs={4}>
-                    <div>
-                    <Typography variant="h6" inline gutterBottom >
-                        ${ad.price}
-
-                    </Typography >
-                    { ad.isFirstLessonFree &&
-                    <Typography variant="caption" color="secondary" style={{marginLeft:10}} inline>First lesson free!</Typography>}
+                <Grid item xs={8}>
+                    <div style={{float: 'left', marginRight: 15}}>
+                        <Avatar alt="Picture"
+                                src={ad.teacher.picture}
+                                style={{width: 55, height: 55, marginLeft: 10}}/>
                     </div>
-                    <Button variant="contained" color="secondary"  onClick={handleClickDetail}>
-                        Book a lesson
-                    </Button>
+                    <div>
+                        <Typography variant="h6">
+                            {ad.teacher.firstName}
+                        </Typography>
+                        <Typography ariant="caption" gutterBottom>
+                            {ad.title}
+                        </Typography>
+                        <Typography variant="body1" wrap="nowrap">
+                            {ad.description}
+                        </Typography>
+                    </div>
+                </Grid>
+                <Grid item xs={4} sm={4}>
+                    <div>
+                        <Typography variant="h6" inline gutterBottom>
+                            ${ad.price}
+                        </Typography >
 
+                        { ad.isFirstLessonFree &&
+
+                        <Typography variant="caption" color="secondary" style={{marginLeft: 5}} inline={useMediaQuery('(min-width:600px)')}>
+                            <sup>1<sup>st</sup> lesson free!</sup>
+                        </Typography>}
+                    </div>
+                    <div style={{marginRight: 10}}>
+                        <Button variant="contained" color="secondary" fullWidth onClick={handleClickDetail}>
+                            {useMediaQuery('(max-width:600px)') ? 'Book' : 'Book a lesson'}
+                        </Button>
+                    </div>
 
                 </Grid>
             </Grid>

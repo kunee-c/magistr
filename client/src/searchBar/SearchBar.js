@@ -127,13 +127,13 @@ class SearchBar extends Component {
         return (
             <form noValidate autoComplete="off" onKeyUp={this.keyup}>
                 <Grid container spacing={8} direction={direction}>
-                    <Grid item xs>
+                    <Grid item xs={12} sm>
                         <AutoSuggest placeholder="topic" theme={this.state.formErrTopic ? theme_err : theme} handleChange={this.handleChangeSearchDialog('topic')} data={getTopics()}/>
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs={12} sm>
                         <AutoSuggest placeholder="city" theme={this.state.formErrLocation ? theme_err : theme} handleChange={this.handleChangeSearchDialog('location')} data={getCities()}/>
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs={12} sm>
                         <Button variant="outlined" color="primary" style={{width:'100%', height:'100%'}} onClick={this.handleSearch}>
                             Search
                         </Button>

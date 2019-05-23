@@ -19,6 +19,9 @@ import Button from '@material-ui/core/Button';
 
 import Review from '../review/Review';
 import {Link} from 'react-router-dom';
+import Collapse from '@material-ui/core/Collapse';
+import {unstable_useMediaQuery as useMediaQuery} from '@material-ui/core/useMediaQuery';
+
 
 class AdDetail extends Component {
 
@@ -28,10 +31,12 @@ class AdDetail extends Component {
         description: '',
         price: 0,
         reviews: [],
-        geolocation: {}
+        geolocation: {},
+        showReviews: false
     }
 
     async componentDidMount() {
+
         const resAd = await fetch(`/api/ads/${this.props.match.params.id}`);
         const ad = await resAd.json();
 
@@ -65,21 +70,24 @@ class AdDetail extends Component {
             isFirstLessonFree: ad.isFirstLessonFree
         });
 
-        //this.state.reviews.map(review => review.grade).reduce((a,b) => a+b)
     }
 
     handleReturnClick = () => {
-        this.props.history.push({pathname:'/results'});
+        this.props.history.push({pathname: '/results'});
+    }
+
+    handleShowReviews = (event) =>  {
+        this.setState({showReviews: !this.state.showReviews})
     }
 
     render() {
         return (
             <>
             <Grid container justify="center" spacing={16} style={{marginTop: 10, marginLeft: '1%', marginRight: 20}}>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                     <Grid container alignItems="center" spacing={16}>
                         <Grid item xs={12}>
-                            <Grid item xs container  spacing={16} >
+                            <Grid item xs container spacing={16}>
                                 <Grid item xs={4}>
                                     <Avatar alt={this.state.teacher.firstName}
                                             src={this.state.teacher.picture}
@@ -113,21 +121,25 @@ class AdDetail extends Component {
                                 Rates
                             </Typography>
                             <Typography variant="body1" gutterBottom>
-                                ${this.state.rate}/hour { this.state.isFirstLessonFree && <i> (First lesson is free)</i>}
+                                ${this.state.rate}/hour { this.state.isFirstLessonFree &&
+                            <i> (First lesson is free)</i>}
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
-
                             {this.state.reviews.length > 0 && <Grade reviews={this.state.reviews}/>}
-                            {`(${this.state.reviews.length} reviews)`}
-                            <List>
-                                {this.state.reviews.map(review => <Review
-                                    review={review}/>)}
-                            </List>
+                            <Link onClick={this.handleShowReviews}>
+                                {`(${this.state.reviews.length} reviews)`}
+                            </Link>
+                            <Collapse in={this.state.showReviews}>
+                                <List>
+                                    {this.state.reviews.map(review => <Review
+                                        review={review}/>)}
+                                </List>
+                            </Collapse>
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                     <Grid container justify="center" spacing={16}>
                         <Grid item xs={12}>
                             <Map
@@ -144,7 +156,7 @@ class AdDetail extends Component {
                         <Grid item xs={12}>
                             <TextField
                                 id="outlined-multiline-static"
-                                label={"Contact "+this.state.teacher.firstName}
+                                label={"Contact " + this.state.teacher.firstName}
                                 multiline
                                 rows="5"
                                 defaultValue=""

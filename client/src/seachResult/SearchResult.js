@@ -34,11 +34,11 @@ class SearchResult extends Component {
         const {getCities, getTopics, classes, ads, updateAds} = this.props;
 
         return (
-            <Grid container style={{marginTop: '25px'}} justify="space-around" spacing={0}>
-                <Grid item xs={3}>
+            <Grid container style={{marginTop: '25px'}} justify="space-around" spacing={24}>
+                <Grid item xs={11} sm={3}>
                     <SearchBar classes={classes} getCities={getCities} getTopics={getTopics} updateAds={updateAds} direction="column"/>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={11} sm={8}>
                     <Grid container spacing={24} direction="column" >
                         {
                             ads.length === 0 && <Grid item xs={12}><Typography align ="center" variant="h5" color="error">No results</Typography></Grid>
