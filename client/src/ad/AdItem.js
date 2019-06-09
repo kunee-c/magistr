@@ -19,12 +19,16 @@ import {
 
 const AdItem = props => {
 
-    let itemHeight;
+    let itemHeight, isSmallScreen = false;
 
-    if (useMediaQuery('(max-width:600px)'))
+    if (useMediaQuery('(max-width:600px)')) {
         itemHeight = 110;
-    else
+        isSmallScreen = true;
+    }
+    else {
         itemHeight = 90;
+        isSmallScreen = false;
+    }
 
     const {ad, user} = props;
 
@@ -60,13 +64,13 @@ const AdItem = props => {
 
                         { ad.isFirstLessonFree &&
 
-                        <Typography variant="caption" color="secondary" style={{marginLeft: 5}} inline={useMediaQuery('(min-width:600px)')}>
+                        <Typography variant="caption" color="secondary" style={{marginLeft: 5}} inline={!isSmallScreen}>
                             <sup>1<sup>st</sup> lesson free!</sup>
                         </Typography>}
                     </div>
                     <div style={{marginRight: 10}}>
                         <Button variant="contained" color="secondary" fullWidth onClick={handleClickDetail}>
-                            {useMediaQuery('(max-width:600px)') ? 'Book' : 'Book a lesson'}
+                            {isSmallScreen ? 'Book' : 'Book a lesson'}
                         </Button>
                     </div>
 

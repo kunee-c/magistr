@@ -41,9 +41,6 @@ class SearchBar extends Component {
             });
 
             Promise.all(adsWithUser).then(adsWithUserCompleted => {
-                this.setState({
-                    ads: adsWithUserCompleted
-                });
                 this.props.updateAds(adsWithUserCompleted);
                 this.props.history.push({pathname:'/results', state:  {queryParams: this.state.queryParams}})
             });
